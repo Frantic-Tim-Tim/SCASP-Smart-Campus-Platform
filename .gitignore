@@ -28,3 +28,6 @@ replay_pid*
 
 # Compiled Java files
 *.class
+
+# Supabase CLI temporary state
+/supabase/.temp/
