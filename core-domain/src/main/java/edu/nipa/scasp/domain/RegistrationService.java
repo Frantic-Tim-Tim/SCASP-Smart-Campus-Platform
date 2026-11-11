@@ -4,21 +4,35 @@ import java.time.Instant;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 public final class RegistrationService {
     private final Map<String, Course> courses = new HashMap<>();
     private final Map<RegistrationKey, Registration> registrations = new HashMap<>();
     private final Map<String, ArrayDeque<WaitlistEntry>> waitlists = new HashMap<>();
+    private final Set<RegistrationKey> activeRegistrations = new HashSet<>();
 
     public synchronized void addCourse(Course course) {
         Objects.requireNonNull(course, "course");
         if (courses.putIfAbsent(course.courseCode(), course) != null) {
             throw new IllegalArgumentException("Course already exists: " + course.courseCode());
         }
+    }
+
+    public synchronized void updateCourse(Course course) {
+        Objects.requireNonNull(course, "course");
+        if (!courses.containsKey(course.courseCode())) {
+            throw new IllegalArgumentException("Unknown course: " + course.courseCode());
+        }
+        if (enrolledCount(course.courseCode()) > course.capacity()) {
+            throw new IllegalArgumentException("Capacity cannot be lower than current enrolment");
+        }
+        courses.put(course.courseCode(), course);
     }
 
     public synchronized RegistrationAttempt register(User actor, Student student,
@@ -34,7 +48,7 @@ public final class RegistrationService {
         Registration existing = registrations.get(key);
         ArrayDeque<WaitlistEntry> queue = waitlists.computeIfAbsent(courseCode,
                 ignored -> new ArrayDeque<>());
-        if ((existing != null && existing.status() == RegistrationStatus.ENROLLED)
+        if (activeRegistrations.contains(key)
                 || queue.stream().anyMatch(entry -> entry.studentId().equals(student.studentId()))) {
             throw new IllegalStateException("Student already registered or waitlisted");
         }
@@ -45,6 +59,7 @@ public final class RegistrationService {
                     RegistrationStatus.ENROLLED, now)
                     : existing.transitionTo(RegistrationStatus.ENROLLED);
             registrations.put(key, registration);
+            activeRegistrations.add(key);
             return new RegistrationAttempt(registration, null);
         }
 
@@ -66,6 +81,7 @@ public final class RegistrationService {
 
         Registration withdrawn = current.transitionTo(RegistrationStatus.WITHDRAWN);
         registrations.put(key, withdrawn);
+        activeRegistrations.remove(key);
         promoteNext(courseCode, now);
         return withdrawn;
     }
@@ -95,6 +111,7 @@ public final class RegistrationService {
                     RegistrationStatus.ENROLLED, previous.createdAt());
         }
         registrations.put(key, promoted);
+        activeRegistrations.add(key);
         reindex(queue);
     }
 
