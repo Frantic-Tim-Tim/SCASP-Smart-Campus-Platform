@@ -70,6 +70,14 @@ public class UserManagementBean implements UserManagementService {
 
         User existing = getUserById(userId);
 
+        if (existing.role() == UserRole.ADMIN
+                && newRole != UserRole.ADMIN
+                && existing.status() == UserStatus.ACTIVE) {
+
+            preventSelfRemoval(actor, existing);
+            ensureAnotherActiveAdministratorExists(existing);
+        }
+
         User updated = new User(
                 existing.userId(),
                 existing.name(),
@@ -100,6 +108,14 @@ public class UserManagementBean implements UserManagementService {
 
         User existing = getUserById(userId);
 
+        if (existing.role() == UserRole.ADMIN
+                && existing.status() == UserStatus.ACTIVE
+                && newStatus == UserStatus.SUSPENDED) {
+
+            preventSelfRemoval(actor, existing);
+            ensureAnotherActiveAdministratorExists(existing);
+        }
+
         User updated = new User(
                 existing.userId(),
                 existing.name(),
@@ -108,6 +124,28 @@ public class UserManagementBean implements UserManagementService {
         );
 
         return userRepository.save(updated);
+    }
+
+    private void preventSelfRemoval(User actor, User target) {
+        if (actor.userId().equals(target.userId())) {
+            throw new SecurityException(
+                    "Administrators cannot demote or suspend their own accounts"
+            );
+        }
+    }
+
+    private void ensureAnotherActiveAdministratorExists(User target) {
+        long activeAdministratorCount = userRepository.findAll()
+                .stream()
+                .filter(user -> user.role() == UserRole.ADMIN)
+                .filter(user -> user.status() == UserStatus.ACTIVE)
+                .count();
+
+        if (activeAdministratorCount <= 1) {
+            throw new IllegalStateException(
+                    "The last active administrator cannot be demoted or suspended"
+            );
+        }
     }
 
     private void requireAdministrator(User actor) {

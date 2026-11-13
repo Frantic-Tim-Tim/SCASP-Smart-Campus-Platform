@@ -31,6 +31,39 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
+
+       <!-- EJB services are packaged once in the EAR, not inside the WAR -->
+        <dependency>
+            <groupId>com.scasp</groupId>
+            <artifactId>enterprise-services</artifactId>
+            <version>${project.version}</version>
+            <type>ejb</type>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Jakarta Servlet API, supplied by WildFly at runtime -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Jakarta JSTL API, supplied by the Jakarta EE server -->
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Enterprise JavaBeans API for injecting SCASP business services -->
+        <dependency>
+            <groupId>jakarta.ejb</groupId>
+            <artifactId>jakarta.ejb-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

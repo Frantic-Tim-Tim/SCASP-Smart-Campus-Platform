@@ -135,6 +135,125 @@ class UserManagementBeanTest {
         );
     }
 
+    @Test
+    void administratorCannotDemoteOwnAccount() {
+        repository.save(admin);
+
+        assertThrows(
+                SecurityException.class,
+                () -> service.changeUserRole(
+                        admin,
+                        admin.userId(),
+                        UserRole.STAFF
+                )
+        );
+
+        assertEquals(
+                UserRole.ADMIN,
+                repository.findById(admin.userId()).orElseThrow().role()
+        );
+    }
+
+    @Test
+    void administratorCannotSuspendOwnAccount() {
+        repository.save(admin);
+
+        assertThrows(
+                SecurityException.class,
+                () -> service.suspendUser(admin, admin.userId())
+        );
+
+        assertEquals(
+                UserStatus.ACTIVE,
+                repository.findById(admin.userId()).orElseThrow().status()
+        );
+    }
+
+    
+    @Test
+    void administratorCannotDemoteOwnAccountWhenItIsTheOnlyAdmin() {
+        repository.save(admin);
+
+        assertThrows(
+                SecurityException.class,
+                () -> service.changeUserRole(
+                        admin,
+                        admin.userId(),
+                        UserRole.STAFF
+                )
+        );
+
+        assertEquals(
+                UserRole.ADMIN,
+                repository.findById("ADM001").orElseThrow().role()
+        );
+    }
+
+    @Test
+    void administratorCannotSuspendOwnAccountWhenItIsTheOnlyAdmin() {
+        repository.save(admin);
+
+        assertThrows(
+                SecurityException.class,
+                () -> service.suspendUser(admin, "ADM001")
+        );
+
+        assertEquals(
+                UserStatus.ACTIVE,
+                repository.findById("ADM001").orElseThrow().status()
+        );
+    }
+
+    @Test
+    void administratorCanDemoteAnotherAdministratorWhenOneRemains() {
+        repository.save(admin);
+
+        User secondAdmin = new User(
+                "ADM002",
+                "Second Administrator",
+                UserRole.ADMIN,
+                UserStatus.ACTIVE
+        );
+
+        repository.save(secondAdmin);
+
+        User updated = service.changeUserRole(
+                admin,
+                "ADM002",
+                UserRole.STAFF
+        );
+
+        assertEquals(UserRole.STAFF, updated.role());
+        assertEquals(
+                UserRole.ADMIN,
+                repository.findById("ADM001").orElseThrow().role()
+        );
+    }
+
+
+    @Test
+    void administratorCanSuspendAnotherAdministratorWhenOneRemains() {
+        repository.save(admin);
+
+        User secondAdmin = new User(
+                "ADM002",
+                "Second Administrator",
+                UserRole.ADMIN,
+                UserStatus.ACTIVE
+        );
+
+        repository.save(secondAdmin);
+
+        User updated = service.suspendUser(admin, "ADM002");
+
+        assertEquals(UserStatus.SUSPENDED, updated.status());
+        assertEquals(
+                UserStatus.ACTIVE,
+                repository.findById("ADM001").orElseThrow().status()
+        );
+    }
+
+
     private static class FakeUserRepository implements UserRepository {
 
         private final List<User> users = new ArrayList<>();
