@@ -29,6 +29,7 @@
         <module>persistence-jdbc</module>
         <module>web-application</module>
         <module>rmi-administration</module>
+        <module>scasp-ear</module>
     </modules>
 
     <dependencyManagement>

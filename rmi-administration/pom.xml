@@ -16,4 +16,12 @@
     <artifactId>rmi-administration</artifactId>
     <name>SCASP RMI Administration</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
 </project>
