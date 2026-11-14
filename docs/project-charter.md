@@ -43,9 +43,9 @@ The project aims to:
 9. Provide campus service information and location access.
 10. Demonstrate Java Collections, multithreading, networking, EJB, JDBC, Servlets, JSP, RMI, CORBA concepts and Android development.
 
-## 5. Intended Users and Stakeholders
+## 5. Intended Users, Stakeholders and Project Team
 
-### Students
+### 5.1 Students
 Students will use the platform to:
 - View available courses.
 - Register for courses and withdraw registrations.
@@ -54,7 +54,7 @@ Students will use the platform to:
 - View announcements and notifications.
 - Locate selected campus services.
 
-### Academic and Administrative Staff
+### 5.2 Academic and Administrative Staff
 Staff will use the platform to:
 - Manage course information and capacity.
 - Process and assign academic service requests.
@@ -62,13 +62,27 @@ Staff will use the platform to:
 - Monitor registrations and waiting lists.
 - Generate administrative reports.
 
-### Project Team
-The development team consists of:
+### 5.3 System Administrators
+System administrators will:
+- Manage user accounts and roles.
+- Monitor system operations.
+- Maintain administrative access and security.
+
+### 5.4 Project Team
+
+The SCASP project is developed by three members:
 - Thomas
 - Majid
 - Mukuka
 
-The team is responsible for requirements analysis, design, implementation, testing, integration and documentation.
+All members share responsibility for requirements analysis,
+design, implementation, testing, integration and documentation.
+
+Project contributions are recorded according to the actual work
+performed by each member. GitHub commit authorship may not always
+identify the individual contributor because some team members
+used a shared GitHub account when experiencing account-related
+technical difficulties.
 
 ## 6. Project Scope
 
@@ -112,15 +126,32 @@ The team is responsible for requirements analysis, design, implementation, testi
 | Version control | Git and GitHub |
 | Testing | JUnit 5 |
 
-## 8. Initial Team Responsibilities
+## 8. Team Responsibilities and Collaboration
 
-| Member | Initial Role | Responsibilities |
-|---|---|---|
-| Thomas | Architecture and Integration Lead | Repository management, architecture, domain model and integration |
-| Majid | Backend and Data Lead | Collections, concurrency, networking, EJB, JDBC and database |
-| Mukuka | Client, Quality and Documentation Lead | Web and mobile interfaces, testing and user documentation |
+The three project members share responsibility for delivering the
+Smart Campus Academic Services Platform.
 
-Team responsibilities will rotate after Stages 3 and 7, as required by the assignment. All members are expected to contribute code and understand the complete system.
+The members collaborate throughout the development process and
+may work together on the same modules, features and technical
+tasks.
+
+Contributions include direct implementation, technical discussions,
+solution recommendations, development guidance, code reviews,
+testing, debugging and integration support.
+
+Thomas primarily handles direct code implementation and repository
+management, while Majid and Mukuka contribute through technical
+guidance, solution discussions, testing and reviewing implemented
+features.
+
+Team responsibilities rotate after Stages 3 and 7, as required
+by the project assignment. All members are expected to contribute
+to the development process and understand the complete system.
+
+Git and GitHub are used to manage source code, branches, commits
+and pull requests. The team maintains shared responsibility for
+ensuring that all project modules work together as one integrated
+system.
 
 ## 9. Project Deliverables
 
