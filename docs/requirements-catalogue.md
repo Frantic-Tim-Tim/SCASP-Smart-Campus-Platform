@@ -140,5 +140,5 @@ Each requirement will be linked to its implementation component and correspondin
 This requirements catalogue establishes the initial functional and non-functional requirements for SCASP. Changes to requirements during implementation should be documented and agreed upon by the project team.
 
 **Prepared by:** SCASP Project Team  
-**Team Members:** Thomas, Majid and Mukuka  
+**Team Members:** Thomas, Majid and Wendy
 **Status:** Initial requirements baseline

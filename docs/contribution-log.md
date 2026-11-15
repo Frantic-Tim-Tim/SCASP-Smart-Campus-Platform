@@ -6,7 +6,7 @@ This document records the contributions made by each group member.
 |---|---|---|---|
 | 01 November 2026 | Thomas | Repository setup | Created and configured the GitHub repository |
 | 01 November 2026 | Majid | Pending | To be updated |
-| 01 November 2026 | Mukuka | Pending | To be updated |
+| 01 November 2026 | Wendy | Pending | To be updated |
 
 ## Contribution Rules
 

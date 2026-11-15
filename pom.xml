@@ -19,6 +19,7 @@
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.11.4</junit.version>
+        <elytron.version>2.9.4.Final</elytron.version>
     </properties>
 
     <modules>

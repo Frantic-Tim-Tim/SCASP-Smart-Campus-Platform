@@ -5,7 +5,7 @@
 **Institution:** National Institute of Public Administration (NIPA)  
 **Version:** 1.0  
 **Date:** 3 November 2026  
-**Project Deadline:** 8 November 2026, 00:00
+**Project Deadline:** November 2026, 00:00
 
 ---
 

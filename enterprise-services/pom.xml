@@ -52,6 +52,21 @@
             <version>3.0.0</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Elytron password hashing: supplied by WildFly at runtime -->
+        <dependency>
+            <groupId>org.wildfly.security</groupId>
+            <artifactId>wildfly-elytron-credential</artifactId>
+            <version>${elytron.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.wildfly.security</groupId>
+            <artifactId>wildfly-elytron-base</artifactId>
+            <version>${elytron.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

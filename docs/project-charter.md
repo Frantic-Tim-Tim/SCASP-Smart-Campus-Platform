@@ -8,11 +8,11 @@
 
 **Institution:** National Institute of Public Administration (NIPA)
 
-**Project Team:** Thomas, Majid and Mukuka
+**Project Team:** Thomas, Majid and Wendy
 
 **Project Start Date:** October 2026
 
-**Submission Deadline:** 8 November 2026, 00:00
+**Submission Deadline:** November 2026, 00:00
 
 **Project Type:** Academic Software Development Project
 
@@ -66,7 +66,7 @@ Staff will use the platform to:
 The development team consists of:
 - Thomas
 - Majid
-- Mukuka
+- Wendy
 
 The team is responsible for requirements analysis, design, implementation, testing, integration and documentation.
 
@@ -118,7 +118,7 @@ The team is responsible for requirements analysis, design, implementation, testi
 |---|---|---|
 | Thomas | Architecture and Integration Lead | Repository management, architecture, domain model and integration |
 | Majid | Backend and Data Lead | Collections, concurrency, networking, EJB, JDBC and database |
-| Mukuka | Client, Quality and Documentation Lead | Web and mobile interfaces, testing and user documentation |
+| Wendy | Client, Quality and Documentation Lead | Web and mobile interfaces, testing and user documentation |
 
 Team responsibilities will rotate after Stages 3 and 7, as required by the assignment. All members are expected to contribute code and understand the complete system.
 
@@ -177,6 +177,6 @@ This charter establishes the initial project direction and scope. Changes to the
 
 **Prepared by:** SCASP Development Team
 
-**Team Members:** Thomas, Majid and Mukuka
+**Team Members:** Thomas, Majid and Wendy
 
 **Project Status:** Stage 0 – Project Inception

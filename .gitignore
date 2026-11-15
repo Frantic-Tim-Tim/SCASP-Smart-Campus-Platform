@@ -28,3 +28,6 @@ replay_pid*
 
 # Compiled Java files
 *.class
+# Local authenticated session cookies
+scasp-cookies.txt
+student-cookies.txt
