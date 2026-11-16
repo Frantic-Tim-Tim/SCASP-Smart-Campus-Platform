@@ -421,3 +421,144 @@ The architecture will be refined as implementation and integration progress.
 
 **Prepared by:** SCASP Project Team  
 **Status:** Initial architecture baseline
+---
+
+# 11. Implemented Architecture and Development Status
+
+**Updated:** 16 November 2026
+
+The original architecture described the intended system. This section records the implementation structure established during development.
+
+## 11.1 Actual Maven Module Structure
+
+| Module | Actual responsibility |
+|---|---|
+| `core-domain` | Domain records, entities, enums and business rules |
+| `concurrent-processing` | Concurrent task execution and processing |
+| `network-gateway` | TCP server/client, UDP communication and HTTP resource retrieval |
+| `enterprise-services` | EJB-based business services and application operations |
+| `persistence-jdbc` | JDBC connections, repositories and database operations |
+| `web-application` | REST resources, Servlets, JSP pages and browser-facing functionality |
+| `rmi-administration` | RMI registry, remote administration interfaces and client/server functionality |
+| `android-client` | Android client project |
+| `scasp-ear` | Enterprise application packaging |
+
+The project uses Maven to manage the multi-module build.
+
+## 11.2 Actual Runtime Architecture
+
+The recorded runtime environment consists of:
+
+- WildFly 42.0.0.Final as the Jakarta EE application server.
+- MariaDB 10.4.32 through XAMPP.
+- The `scasp_db` relational database.
+- WildFly datasource `ScaspDS`.
+- Datasource JNDI name `java:/jdbc/ScaspDS`.
+- A web application deployed under the `/scasp` context.
+- REST resources under `/scasp/api`.
+- An RMI registry on port 1099 and remote service on port 1100.
+
+The web health resource was previously accessible at:
+
+`http://localhost:8080/scasp/api/health`
+
+Its recorded response was:
+
+`{"status":"UP","application":"SCASP"}`
+
+## 11.3 Implemented Application Components
+
+Development produced components for:
+
+- User management and role administration.
+- Course management and student registration.
+- JDBC persistence and database repositories.
+- Academic service requests.
+- Announcements and notification-related functionality.
+- Academic reporting.
+- Audit-event recording.
+- Remote administration.
+- Web-based student, staff and administrative interfaces.
+
+These are implementation records, not a declaration that every workflow passed end-to-end testing.
+
+## 11.4 Persistence Architecture
+
+The persistence module provides JDBC-based database access and repository functionality.
+
+The connection infrastructure supports datasource-based connections for application-server deployment and configuration-based connections for testing.
+
+The project includes a database schema resource and tests using H2 in MySQL compatibility mode.
+
+The deployed WildFly datasource connection test previously returned `true`.
+
+## 11.5 Security Architecture
+
+The application-server security work included:
+
+- An Elytron JDBC realm named `ScaspRealm`.
+- Role decoding for application authorization.
+- An application security mapping for the SCASP application.
+- BCrypt-based password verification configuration.
+- Role-restricted administrative EJB operations.
+- Session and authentication-related functionality.
+
+The RMI remote invocation path remained unresolved at the time of the freeze. Consequently, the security configuration and remote authorization workflow still require complete integration testing.
+
+## 11.6 Verified and Unverified Architecture Elements
+
+| Component | Status at freeze |
+|---|---|
+| Maven multi-module structure | Established |
+| Core domain | Implemented |
+| Concurrent processing | Implemented |
+| TCP, UDP and HTTP networking | Implemented; 20 module tests recorded as passing |
+| JDBC persistence | Implemented; datasource connection previously verified |
+| EJB services | Developed; deployment/integration evidence exists |
+| Web application | Deployed; health endpoint previously verified |
+| Announcements and notifications | Components developed; complete workflow not verified |
+| Service requests | Components developed; complete workflow not verified |
+| Academic reports | Components developed; complete workflow not verified |
+| RMI registry | Startup verified |
+| RMI-to-EJB invocation | Unresolved |
+| Android client | Completion and integration not verified |
+| CORBA interoperability | Further deliverables and evidence required |
+
+## 11.7 Architecture Limitations
+
+The architecture remains a development prototype.
+
+The complete application has not been proven through a final end-to-end test. The Android client and CORBA deliverables require further verification, while remote administration requires resolution of the EJB client destination failure.
+
+The original context and component diagrams should therefore be understood as a mixture of implemented architecture and proposed integration relationships, not as proof that every depicted connection is operational.
+
+## 11.8 Future Architecture Work
+
+When development resumes:
+
+1. Resolve remote EJB connectivity.
+2. Verify service-to-persistence integration.
+3. Complete end-to-end REST and web workflows.
+4. Verify notification generation and delivery.
+5. Verify Android API integration.
+6. Complete the CORBA interoperability and migration evidence.
+7. Review authentication, authorization and session security.
+8. Update architecture diagrams to reflect the final verified implementation.
+
+## 12. Team Collaboration and Implementation Context
+
+SCASP was conceptualised collaboratively by Thomas, Majid and Wendy.
+The group participated in brainstorming, discussing the academic service
+problems to address and shaping the proposed system and its architecture.
+
+During implementation, limited access to suitable computers and laptops
+prevented Majid and Wendy from independently setting up development
+environments and implementing and testing the application on their machines.
+Consequently, Thomas carried out much of the practical implementation,
+integration and technical verification.
+
+The architecture therefore reflects the group's jointly developed project
+direction and the implementation work completed under these resource
+constraints. The distinction between collaborative conceptualisation and
+the practical implementation circumstances is important when interpreting
+the project's development history.

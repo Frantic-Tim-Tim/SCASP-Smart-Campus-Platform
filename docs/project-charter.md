@@ -120,7 +120,7 @@ The team is responsible for requirements analysis, design, implementation, testi
 | Majid | Backend and Data Lead | Collections, concurrency, networking, EJB, JDBC and database |
 | Wendy | Client, Quality and Documentation Lead | Web and mobile interfaces, testing and user documentation |
 
-Team responsibilities will rotate after Stages 3 and 7, as required by the assignment. All members are expected to contribute code and understand the complete system.
+These were the initial planned responsibilities. Actual implementation was affected by the computer-resource constraints documented in Section 13.6.
 
 ## 9. Project Deliverables
 
@@ -152,7 +152,7 @@ The expected deliverables include:
 
 ### Assumptions
 - All three team members are available throughout the development period.
-- Each member has access to a suitable computer and development environment.
+- It was initially assumed that each member would have access to a suitable computer and development environment. This assumption was not met during implementation.
 - The team can access the required development tools and software.
 - The platform will initially use fictional demonstration data.
 
@@ -179,4 +179,91 @@ This charter establishes the initial project direction and scope. Changes to the
 
 **Team Members:** Thomas, Majid and Wendy
 
-**Project Status:** Stage 0 – Project Inception
+**Project Status:** Development frozen – 16 November 2026
+---
+
+# 13. Actual Development History and Project Outcome
+
+**Updated:** 16 November 2026
+
+The original charter established the project scope and intended team responsibilities. During implementation, the project progressed from initial repository setup into a multi-module Java enterprise application.
+
+### 13.1 Development Approach
+
+The project initially followed a collaborative team structure. During the later implementation phase, Thomas took responsibility for coordinating and carrying out the remaining development, integration, testing and documentation work individually.
+
+The implementation included:
+
+- Establishment of a multi-module Maven project.
+- Development of the core domain model.
+- Development of concurrent-processing functionality.
+- Implementation of TCP, UDP and HTTP networking components.
+- Development of JDBC repositories and database connectivity.
+- Enterprise JavaBeans and application-server integration.
+- Web application development using Servlets, JSP and REST resources.
+- Remote administration using Java RMI.
+- Development of user-management, announcements, service-request and reporting components.
+
+### 13.2 Actual Development Environment
+
+The implementation used Java 21, Maven 3.10.0, MariaDB through XAMPP, WildFly 42.0.0.Final, Git and GitHub.
+
+The application was organized into separate Maven modules, including `core-domain`, `concurrent-processing`, `network-gateway`, `enterprise-services`, `persistence-jdbc`, `web-application`, `rmi-administration` and `scasp-ear`.
+
+### 13.3 Project Outcome
+
+The project achieved a substantial implementation foundation. Infrastructure checks confirmed that the web health endpoint responded, the WildFly datasource connected successfully, and the RMI registry and remote service could start.
+
+The networking module also had a recorded successful test run.
+
+However, the complete integrated application was not fully verified. The RMI-to-EJB remote invocation remained unresolved, and several application workflows required further integration testing.
+
+### 13.4 Development Freeze
+
+On 16 November 2026, development was paused to preserve the available implementation and prepare project documentation.
+
+The preserved source state is:
+
+- **Branch:** `feat/announcements-notifications`
+- **Commit:** `1c60bb4`
+- **Commit message:** `chore: preserve SCASP development freeze state`
+- **Remote:** `origin/feat/announcements-notifications`
+
+A separate backup archive was also created:
+
+`SCASP-freeze-backup-20261116-034834.tar.gz`
+
+The freeze is a development pause, not project abandonment.
+
+### 13.5 Revised Success Assessment
+
+The original success criteria remain the intended project requirements. They should not be treated as all achieved merely because implementation files exist.
+
+Final assessment requires:
+
+1. A successful fresh full-project build.
+2. Verification of the principal student and staff workflows.
+3. Verification of role-based access and persistence.
+4. Successful integration testing of remote administration.
+5. Completion or appropriate documentation of the CORBA requirements.
+6. Android client verification.
+7. Final demonstration and test evidence.
+
+**Current project status:** Development paused; source code preserved.
+
+### 13.6 Actual Team Participation and Resource Constraints
+
+The project was a collaborative group effort involving Thomas, Majid and
+Wendy. All three members participated in brainstorming, discussing proposed
+solutions and shaping the project's concept, objectives and direction.
+
+The original team responsibilities documented in this charter represented
+the planned division of work. During implementation, the group encountered
+computer-resource limitations. Majid and Wendy did not have suitable
+computers or laptops available to independently develop and test the
+application in their own development environments.
+
+As a result, Thomas carried out much of the practical coding, environment
+configuration, integration and technical testing. This arrangement arose
+from the resource limitations and does not mean that the other members
+were excluded from the group's conceptualisation and planning contributions.
