@@ -335,6 +335,8 @@
             </table>
         </div>
     </section>
+    <%@ include file="/WEB-INF/views/student/service-requests.jspf" %>
+    <%@ include file="/WEB-INF/views/shared/announcements.jspf" %>
 </main>
 
 <footer>

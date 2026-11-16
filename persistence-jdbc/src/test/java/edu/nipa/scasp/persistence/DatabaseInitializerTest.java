@@ -29,12 +29,12 @@ class DatabaseInitializerTest {
                      + "WHERE TABLE_SCHEMA = 'PUBLIC' "
                      + "AND TABLE_NAME IN ("
                      + "'USERS', 'STUDENTS', 'COURSES', 'REGISTRATIONS', "
-                     + "'WAITLIST_ENTRIES', 'SERVICE_REQUESTS', "
-                     + "'ANNOUNCEMENTS', 'AUDIT_EVENTS', 'CAMPUS_SERVICES')"
+                     + "'WAITLIST_ENTRIES', 'SERVICE_REQUESTS', 'SERVICE_REQUEST_UPDATES', "
+                     + "'ANNOUNCEMENTS', 'ANNOUNCEMENT_READS', 'AUDIT_EVENTS', 'CAMPUS_SERVICES')"
              )) {
 
             result.next();
-            assertEquals(9, result.getInt(1));
+            assertEquals(11, result.getInt(1));
         }
     }
 }

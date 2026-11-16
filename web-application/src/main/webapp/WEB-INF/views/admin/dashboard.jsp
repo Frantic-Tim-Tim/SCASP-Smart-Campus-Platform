@@ -413,6 +413,9 @@
         </div>
     </section>
 
+    <%@ include file="/WEB-INF/views/admin/service-requests.jspf" %>
+    <%@ include file="/WEB-INF/views/admin/announcements.jspf" %>
+    <%@ include file="/WEB-INF/views/admin/reports.jspf" %>
 </main>
 
 <footer>

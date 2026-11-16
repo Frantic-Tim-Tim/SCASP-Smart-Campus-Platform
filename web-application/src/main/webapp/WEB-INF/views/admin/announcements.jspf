@@ -1,0 +1,166 @@
+<section id="admin-announcements"
+         class="admin-announcements"
+         data-api-base="${pageContext.request.contextPath}/api/announcements">
+
+    <div class="admin-announcements-heading">
+        <div>
+            <h2>Campus Announcements</h2>
+            <p>Publish updates and manage announcements across the institution.</p>
+        </div>
+    </div>
+
+    <form id="announcement-admin-form" class="announcement-admin-form">
+        <input type="hidden" id="announcement-edit-id">
+
+        <div class="announcement-form-grid">
+            <label>
+                Announcement title
+                <input id="announcement-title" type="text" maxlength="200"
+                       required placeholder="Enter announcement title">
+            </label>
+
+            <label>
+                Target audience
+                <select id="announcement-audience" required>
+                    <option value="ALL">Everyone</option>
+                    <option value="STUDENTS">Students only</option>
+                    <option value="STAFF">Staff only</option>
+                </select>
+            </label>
+        </div>
+
+        <label class="announcement-body-label">
+            Announcement details
+            <textarea id="announcement-body" rows="5" required
+                      placeholder="Write the announcement..."></textarea>
+        </label>
+
+        <div class="announcement-form-actions">
+            <button type="submit" id="announcement-submit-button">
+                Publish announcement
+            </button>
+            <button type="button" id="announcement-cancel-edit"
+                    hidden>Cancel editing</button>
+        </div>
+        <p id="announcement-admin-message" role="status"></p>
+    </form>
+
+    <div class="announcement-admin-list-heading">
+        <h3>Published announcements</h3>
+        <button type="button" id="announcement-refresh">Refresh</button>
+    </div>
+
+    <div id="announcement-admin-list">
+        <p>Loading announcements...</p>
+    </div>
+</section>
+
+<style>
+.admin-announcements {
+    margin: 30px 0;
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #fff;
+}
+.admin-announcements-heading p {
+    color: #64748b;
+}
+.announcement-admin-form {
+    margin: 20px 0 28px;
+    padding: 18px;
+    border-radius: 10px;
+    background: #f8fafc;
+}
+.announcement-form-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+}
+.announcement-admin-form label {
+    display: grid;
+    gap: 7px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+.announcement-admin-form input,
+.announcement-admin-form select,
+.announcement-admin-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font: inherit;
+    background: white;
+}
+.announcement-form-actions {
+    display: flex;
+    gap: 10px;
+}
+.announcement-form-actions button,
+.announcement-list-actions button,
+#announcement-refresh {
+    padding: 9px 13px;
+    border: 0;
+    border-radius: 7px;
+    cursor: pointer;
+}
+#announcement-submit-button {
+    background: #1d4ed8;
+    color: white;
+}
+#announcement-cancel-edit,
+#announcement-refresh {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+.announcement-list-heading,
+.announcement-admin-list-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+.announcement-admin-card {
+    margin: 12px 0;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+}
+.announcement-admin-card.archived {
+    opacity: .65;
+    background: #f8fafc;
+}
+.announcement-admin-card h4 {
+    margin: 0 0 8px;
+}
+.announcement-admin-card p {
+    white-space: pre-wrap;
+}
+.announcement-list-meta {
+    color: #64748b;
+    font-size: .85rem;
+}
+.announcement-list-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+.announcement-edit-button {
+    background: #dbeafe;
+    color: #1e40af;
+}
+.announcement-archive-button {
+    background: #fee2e2;
+    color: #991b1b;
+}
+@media (max-width: 700px) {
+    .announcement-form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script src="${pageContext.request.contextPath}/assets/js/admin-announcements.js" defer></script>

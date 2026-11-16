@@ -1,0 +1,163 @@
+<style>
+    .sr-panel {
+        background: white;
+        padding: 22px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,.05);
+        margin-bottom: 24px;
+    }
+
+    .sr-panel h2 { margin-top: 0; }
+
+    .sr-form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .sr-field { display: flex; flex-direction: column; gap: 7px; }
+    .sr-field.full { grid-column: 1 / -1; }
+
+    .sr-field label { font-weight: bold; font-size: 13px; }
+
+    .sr-field input,
+    .sr-field select,
+    .sr-field textarea {
+        width: 100%;
+        padding: 11px;
+        border: 1px solid #cbd5e1;
+        border-radius: 7px;
+        font: inherit;
+    }
+
+    .sr-field textarea { min-height: 100px; resize: vertical; }
+
+    .sr-button {
+        background: #1d4ed8;
+        color: white;
+        border: 0;
+        padding: 11px 16px;
+        border-radius: 7px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .sr-button:disabled { opacity: .6; cursor: not-allowed; }
+
+    .sr-message { margin: 12px 0; font-weight: bold; }
+    .sr-success { color: #15803d; }
+    .sr-error { color: #b91c1c; }
+
+    .sr-list { display: grid; gap: 14px; }
+
+    .sr-card {
+        border: 1px solid #e2e8f0;
+        border-radius: 9px;
+        padding: 17px;
+    }
+
+    .sr-card h3 { margin: 0 0 8px; }
+
+    .sr-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin: 12px 0;
+        font-size: 13px;
+    }
+
+    .sr-tag {
+        display: inline-block;
+        padding: 5px 9px;
+        border-radius: 20px;
+        background: #eff6ff;
+        color: #1e40af;
+        font-weight: bold;
+    }
+
+    .sr-history {
+        margin-top: 14px;
+        padding: 13px;
+        background: #f8fafc;
+        border-radius: 7px;
+    }
+
+    .sr-history ul { padding-left: 20px; }
+    .sr-history li { margin: 9px 0; }
+
+    .sr-muted { color: #64748b; font-size: 13px; }
+    .sr-empty { color: #64748b; padding: 15px 0; }
+
+    @media (max-width: 600px) {
+        .sr-form { grid-template-columns: 1fr; }
+        .sr-field.full { grid-column: auto; }
+    }
+</style>
+
+<section class="sr-panel" id="serviceRequests"
+         data-api-base="${pageContext.request.contextPath}/api/service-requests">
+
+    <h2>Academic Service Requests</h2>
+    <p class="sr-muted">
+        Submit an academic service request and track its progress.
+    </p>
+
+    <h3>Submit a New Request</h3>
+
+    <form id="srForm" class="sr-form">
+        <div class="sr-field full">
+            <label for="srTitle">Request title</label>
+            <input id="srTitle" name="title" type="text"
+                   maxlength="200" required
+                   placeholder="e.g. Course registration assistance">
+        </div>
+
+        <div class="sr-field full">
+            <label for="srDescription">Description</label>
+            <textarea id="srDescription" name="description"
+                      required
+                      placeholder="Explain the assistance you need..."></textarea>
+        </div>
+
+        <div class="sr-field">
+            <label for="srCategory">Category</label>
+            <select id="srCategory" name="category" required>
+                <option value="ACADEMIC">Academic</option>
+                <option value="REGISTRATION">Course registration</option>
+                <option value="FINANCIAL">Financial</option>
+                <option value="TECHNICAL">Technical support</option>
+                <option value="OTHER">Other</option>
+            </select>
+        </div>
+
+        <div class="sr-field">
+            <label for="srPriority">Priority</label>
+            <select id="srPriority" name="priority" required>
+                <option value="LOW">Low</option>
+                <option value="NORMAL" selected>Normal</option>
+                <option value="HIGH">High</option>
+                <option value="URGENT">Urgent</option>
+            </select>
+        </div>
+
+        <div class="sr-field full">
+            <button class="sr-button" id="srSubmit" type="submit">
+                Submit Request
+            </button>
+        </div>
+    </form>
+
+    <p id="srMessage" class="sr-message" role="status"
+       aria-live="polite"></p>
+
+    <hr>
+
+    <h3>My Requests <span id="srCount" class="sr-muted">0</span></h3>
+
+    <div id="srList" class="sr-list">
+        <p class="sr-empty">Loading your requests...</p>
+    </div>
+</section>
+
+<script src="${pageContext.request.contextPath}/assets/js/service-requests.js"
+        defer></script>

@@ -1,0 +1,92 @@
+<section class="scasp-announcements" id="scasp-announcements"
+         data-api-base="${pageContext.request.contextPath}/api/announcements">
+    <div class="scasp-announcements-heading">
+        <div>
+            <h2>Campus Announcements</h2>
+            <p>Important updates and information from your institution.</p>
+        </div>
+        <span id="announcement-unread-count" class="announcement-count">0 unread</span>
+    </div>
+
+    <div id="announcement-feed" class="announcement-feed">
+        <p>Loading announcements...</p>
+    </div>
+</section>
+
+<style>
+.scasp-announcements {
+    margin: 28px 0;
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #fff;
+}
+.scasp-announcements-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+.scasp-announcements-heading h2 {
+    margin: 0 0 5px;
+}
+.scasp-announcements-heading p {
+    margin: 0;
+    color: #64748b;
+}
+.announcement-count {
+    white-space: nowrap;
+    border-radius: 20px;
+    padding: 6px 12px;
+    background: #e0f2fe;
+    color: #075985;
+    font-size: .85rem;
+    font-weight: 600;
+}
+.announcement-feed {
+    display: grid;
+    gap: 12px;
+}
+.announcement-card {
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #fff;
+}
+.announcement-card.unread {
+    border-left: 4px solid #2563eb;
+    background: #f8fbff;
+}
+.announcement-card h3 {
+    margin: 0 0 8px;
+}
+.announcement-card p {
+    white-space: pre-wrap;
+    line-height: 1.55;
+}
+.announcement-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: #64748b;
+    font-size: .82rem;
+}
+.announcement-read-button {
+    margin-top: 12px;
+    padding: 8px 13px;
+    border: 0;
+    border-radius: 7px;
+    background: #1d4ed8;
+    color: white;
+    cursor: pointer;
+}
+.announcement-read-label {
+    margin-top: 12px;
+    color: #15803d;
+    font-size: .85rem;
+    font-weight: 600;
+}
+</style>
+
+<script src="${pageContext.request.contextPath}/assets/js/announcements-feed.js" defer></script>

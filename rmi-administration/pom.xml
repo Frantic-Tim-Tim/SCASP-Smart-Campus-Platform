@@ -22,6 +22,18 @@
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.scasp</groupId>
+            <artifactId>enterprise-services</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-client-all</artifactId>
+            <version>42.0.0.Final</version>
+        </dependency>
     </dependencies>
 
 </project>

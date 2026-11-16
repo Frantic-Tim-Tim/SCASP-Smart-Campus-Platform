@@ -1,0 +1,75 @@
+<section class="panel" id="adminAcademicReports"
+         data-course-url="${pageContext.request.contextPath}/api/admin/reports/course-enrolment"
+         data-registration-url="${pageContext.request.contextPath}/api/admin/reports/student-registrations"
+         data-waitlist-url="${pageContext.request.contextPath}/api/admin/reports/course-waitlist">
+
+    <h2>Academic Reports & Analytics</h2>
+    <p class="muted">Live academic data from the SCASP database.</p>
+
+    <button type="button" id="refreshAcademicReports">Refresh Reports</button>
+    <p id="academicReportsMessage" role="status" aria-live="polite"></p>
+
+    <section>
+        <h3>Course Enrolment Summary</h3>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course</th>
+                        <th>Capacity</th>
+                        <th>Status</th>
+                        <th>Enrolled</th>
+                        <th>Waitlisted</th>
+                        <th>Available Seats</th>
+                    </tr>
+                </thead>
+                <tbody id="courseEnrolmentRows">
+                    <tr><td colspan="7">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section>
+        <h3>Student Registration Report</h3>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Course Code</th>
+                        <th>Course</th>
+                        <th>Registration Status</th>
+                        <th>Registered At</th>
+                    </tr>
+                </thead>
+                <tbody id="studentRegistrationRows">
+                    <tr><td colspan="5">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section>
+        <h3>Course Waitlist Report</h3>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course</th>
+                        <th>Student ID</th>
+                        <th>Position</th>
+                        <th>Waitlisted At</th>
+                    </tr>
+                </thead>
+                <tbody id="courseWaitlistRows">
+                    <tr><td colspan="5">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</section>
+
+<script src="${pageContext.request.contextPath}/assets/js/admin-reports.js" defer></script>

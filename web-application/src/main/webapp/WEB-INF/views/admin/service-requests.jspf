@@ -1,0 +1,170 @@
+<section class="panel" id="adminServiceRequests"
+         data-api-base="${pageContext.request.contextPath}/api/service-requests">
+
+    <h2>Service Request Overview</h2>
+    <p class="muted">
+        Institution-wide monitoring of student service requests.
+    </p>
+
+    <div class="service-stats">
+        <article class="service-stat">
+            <small>Total requests</small>
+            <strong id="adminRequestTotal">0</strong>
+        </article>
+        <article class="service-stat">
+            <small>Awaiting action</small>
+            <strong id="adminRequestPending">0</strong>
+        </article>
+        <article class="service-stat">
+            <small>In progress</small>
+            <strong id="adminRequestProgress">0</strong>
+        </article>
+        <article class="service-stat">
+            <small>Resolved</small>
+            <strong id="adminRequestResolved">0</strong>
+        </article>
+        <article class="service-stat">
+            <small>Urgent priority</small>
+            <strong id="adminRequestUrgent">0</strong>
+        </article>
+    </div>
+
+    <div class="service-toolbar">
+        <div>
+            <label for="adminRequestStatus">Status</label>
+            <select id="adminRequestStatus">
+                <option value="">All statuses</option>
+                <option value="SUBMITTED">Submitted</option>
+                <option value="IN_PROGRESS">In progress</option>
+                <option value="RESOLVED">Resolved</option>
+                <option value="CLOSED">Closed</option>
+                <option value="CANCELLED">Cancelled</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="adminRequestPriority">Priority</label>
+            <select id="adminRequestPriority">
+                <option value="">All priorities</option>
+                <option value="LOW">Low</option>
+                <option value="NORMAL">Normal</option>
+                <option value="HIGH">High</option>
+                <option value="URGENT">Urgent</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="adminRequestSearch">Search</label>
+            <input id="adminRequestSearch" type="search"
+                   placeholder="Title or student ID">
+        </div>
+
+        <div>
+            <button type="button" class="primary"
+                    id="adminRequestRefresh">Refresh</button>
+        </div>
+    </div>
+
+    <p id="adminRequestMessage" role="status" aria-live="polite"></p>
+
+    <div class="admin-request-table-wrap">
+        <table class="admin-request-table">
+            <thead>
+                <tr>
+                    <th>Request</th>
+                    <th>Student</th>
+                    <th>Category</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Assigned to</th>
+                    <th>Submitted</th>
+                </tr>
+            </thead>
+            <tbody id="adminRequestRows">
+                <tr><td colspan="7">Loading requests...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>
+        <a href="${pageContext.request.contextPath}/staff/dashboard">
+            Open Service Request Management
+        </a>
+    </p>
+</section>
+
+<style>
+    .service-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+        margin: 20px 0;
+    }
+
+    .service-stat {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        padding: 16px;
+        border-radius: 8px;
+    }
+
+    .service-stat small {
+        display: block;
+        color: #64748b;
+        margin-bottom: 9px;
+    }
+
+    .service-stat strong {
+        font-size: 26px;
+    }
+
+    .service-toolbar {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+        align-items: end;
+        margin: 20px 0;
+    }
+
+    .service-toolbar label {
+        display: block;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    .service-toolbar input,
+    .service-toolbar select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        font: inherit;
+    }
+
+    .admin-request-table-wrap { overflow-x: auto; }
+
+    .admin-request-table {
+        width: 100%;
+        min-width: 850px;
+        border-collapse: collapse;
+    }
+
+    .admin-request-table th,
+    .admin-request-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .admin-request-table th { background: #f8fafc; }
+
+    #adminRequestMessage {
+        margin: 12px 0;
+        color: #b91c1c;
+    }
+
+    .admin-request-empty { color: #64748b; padding: 15px; }
+</style>
+
+<script src="${pageContext.request.contextPath}/assets/js/admin-service-requests.js"></script>

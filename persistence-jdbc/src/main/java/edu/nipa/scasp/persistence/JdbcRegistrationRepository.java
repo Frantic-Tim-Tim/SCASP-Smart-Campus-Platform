@@ -12,6 +12,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import edu.nipa.scasp.domain.CourseStatus;
+import edu.nipa.scasp.domain.AuditEvent;
 import edu.nipa.scasp.domain.Registration;
 import edu.nipa.scasp.domain.RegistrationAttempt;
 import edu.nipa.scasp.domain.RegistrationStatus;
@@ -22,6 +23,31 @@ public final class JdbcRegistrationRepository
 
     public JdbcRegistrationRepository() {
     }
+
+    public void saveAuditEvent(
+            Connection connection,
+            AuditEvent event
+    ) throws SQLException {
+        Objects.requireNonNull(connection, "connection");
+        Objects.requireNonNull(event, "event");
+
+        String sql = """
+                INSERT INTO audit_events
+                    (event_id, actor, action, entity_type, entity_id, occurred_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """;
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, event.eventId().toString());
+            statement.setString(2, event.actor());
+            statement.setString(3, event.action());
+            statement.setString(4, event.entityType());
+            statement.setString(5, event.entityId());
+            statement.setTimestamp(6, Timestamp.from(event.occurredAt()));
+            statement.executeUpdate();
+        }
+    }
+
 
     @Override
     public RegistrationAttempt register(

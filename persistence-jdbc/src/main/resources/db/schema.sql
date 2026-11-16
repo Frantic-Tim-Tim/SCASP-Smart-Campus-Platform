@@ -48,6 +48,8 @@ CREATE TABLE IF NOT EXISTS waitlist_entries (
 CREATE TABLE IF NOT EXISTS service_requests (
     request_id CHAR(36) PRIMARY KEY,
     student_id VARCHAR(100) NOT NULL,
+    title VARCHAR(200) NOT NULL,
+    description TEXT NOT NULL,
     category VARCHAR(150) NOT NULL,
     priority VARCHAR(30) NOT NULL,
     status VARCHAR(30) NOT NULL,
@@ -58,7 +60,21 @@ CREATE TABLE IF NOT EXISTS service_requests (
         FOREIGN KEY (student_id) REFERENCES students(student_id)
 );
 
+CREATE TABLE IF NOT EXISTS service_request_updates (
+    update_id CHAR(36) PRIMARY KEY,
+    request_id CHAR(36) NOT NULL,
+    author_user_id VARCHAR(100) NOT NULL,
+    note TEXT NOT NULL,
+    created_at DATETIME(6) NOT NULL,
+    CONSTRAINT fk_request_update_request
+        FOREIGN KEY (request_id)
+        REFERENCES service_requests(request_id)
+        ON DELETE CASCADE,
+    INDEX idx_request_update_created (request_id, created_at)
+);
+
 CREATE TABLE IF NOT EXISTS announcements (
+    archived BOOLEAN NOT NULL DEFAULT FALSE,
     announcement_id CHAR(36) PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
     body TEXT NOT NULL,
@@ -88,4 +104,16 @@ CREATE TABLE IF NOT EXISTS user_credentials (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_credentials_user
         FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS announcement_reads (
+    announcement_id CHAR(36) NOT NULL,
+    user_id VARCHAR(100) NOT NULL,
+    read_at DATETIME(6) NOT NULL,
+    PRIMARY KEY (announcement_id, user_id),
+    CONSTRAINT fk_announcement_read_announcement
+        FOREIGN KEY (announcement_id)
+        REFERENCES announcements(announcement_id)
+        ON DELETE CASCADE,
+    INDEX idx_announcement_reads_user (user_id, read_at)
 );

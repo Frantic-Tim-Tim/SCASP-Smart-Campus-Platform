@@ -1,21 +1,42 @@
 package edu.nipa.scasp.rmi.api;
 
+import edu.nipa.scasp.domain.User;
+import edu.nipa.scasp.domain.UserRole;
 import edu.nipa.scasp.rmi.dto.ServerStatus;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
-/**
- * Defines remote administration operations available to SCASP clients.
- */
 public interface RemoteAdminService extends Remote {
 
-    /**
-     * Checks whether the remote administration server is available.
-     */
+    // Existing monitoring operations
     String ping() throws RemoteException;
 
-    /**
-     * Retrieves the current status of the administration server.
-     */
     ServerStatus getServerStatus() throws RemoteException;
+
+    // Administrator authentication
+    String login(String username, String password) throws RemoteException;
+
+    void logout(String sessionToken) throws RemoteException;
+
+    // User administration
+    User registerUser(String sessionToken, User newUser)
+            throws RemoteException;
+
+    User getUserById(String sessionToken, String userId)
+            throws RemoteException;
+
+    List<User> getAllUsers(String sessionToken)
+            throws RemoteException;
+
+    User changeUserRole(
+            String sessionToken, String userId, UserRole newRole)
+            throws RemoteException;
+
+    User suspendUser(String sessionToken, String userId)
+            throws RemoteException;
+
+    User activateUser(String sessionToken, String userId)
+            throws RemoteException;
 }
